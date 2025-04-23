@@ -23,35 +23,9 @@ A customizable and responsive HTML sitemap plugin for WordPress, built with perf
 ## 🚀 Installation
 
 ### Option 1: From ZIP File
-1. Download the latest plugin ZIP from GitHub [Releases](https://github.com/YOUR_USERNAME/advanced-html-sitemap/releases).
+1. Download the latest plugin ZIP from GitHub [Releases](https://github.com/outpaceseo/advanced-html-sitemap/releases).
 2. In your WordPress dashboard, go to `Plugins > Add New > Upload Plugin`.
 3. Upload the ZIP file and activate the plugin.
-
-### Option 2: Git + Composer (Advanced)
-```bash
-composer require your-vendor/advanced-html-sitemap
-```
-
----
-
-## 🔁 Automatic Updates via GitHub
-
-This plugin supports automatic updates using [YahnisElsts/plugin-update-checker](https://github.com/YahnisElsts/plugin-update-checker).
-
-### To Enable Updates:
-
-1. Generate a **Personal Access Token** (PAT) from GitHub:
-   - Visit: [https://github.com/settings/tokens](https://github.com/settings/tokens)
-   - Generate token with `repo` scope
-
-2. Define the token in your `wp-config.php`:
-```php
-define('GITHUB_UPDATER_TOKEN', 'your_personal_access_token_here');
-```
-
-3. That’s it! The plugin will now check GitHub for updates automatically.
-
----
 
 ## 🔧 Shortcode Usage
 

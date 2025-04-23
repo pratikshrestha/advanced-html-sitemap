@@ -6,7 +6,7 @@ Requires at least: 5.0
 Tested up to: 6.5
 Stable tag: trunk
 License: Private
-License URI: https://your-site.com
+License URI: https://outpaceseo.com
 
 A responsive and customizable HTML sitemap plugin for WordPress with GitHub-powered private updates.
 
