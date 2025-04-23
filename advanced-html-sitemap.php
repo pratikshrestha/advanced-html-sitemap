@@ -3,7 +3,7 @@
 /*
 Plugin Name: Advanced HTML Sitemap
 Description: Generate an HTML sitemap with customizable post types, taxonomies, columns, and more.
-Version: 1.0.1
+Version: 1.0.2
 Author: Pratik Shrestha
 */
 
