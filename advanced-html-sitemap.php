@@ -4,7 +4,9 @@
 Plugin Name: Advanced HTML Sitemap
 Description: Generate an HTML sitemap with customizable post types, taxonomies, columns, and more.
 Version: 1.0.0
-Author: Pratik Lal Shrestha
+Author: Pratik Shrestha
+GitHub Plugin URI: outpaceseo/advance-html-sitemap
+GitHub Plugin URI: https://github.com/outpaceseo/advance-html-sitemap
 */
 
 add_shortcode('html_sitemap', 'advanced_html_sitemap_shortcode');
@@ -233,4 +235,19 @@ function html_sitemap_generator_page() {
     <?php
 }
 
-?>
+require_once plugin_dir_path(__FILE__) . 'plugin-update-checker/plugin-update-checker.php';
+
+$myUpdateChecker = Puc_v4_Factory::buildUpdateChecker(
+    'https://github.com/outpaceseo/advanced-html-sitemap/',
+    __FILE__,
+    'advanced-html-sitemap'
+);
+
+// Optional: If your repo is private, use an access token.
+$myUpdateChecker->setAuthentication('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');
+
+// Optional: Set the branch to use for updates.
+$myUpdateChecker->setBranch('main');
+
+// Optional: Show changelog from releases.
+$myUpdateChecker->getVcsApi()->enableReleaseAssets();
