@@ -5,8 +5,6 @@ Plugin Name: Advanced HTML Sitemap
 Description: Generate an HTML sitemap with customizable post types, taxonomies, columns, and more.
 Version: 1.0.0
 Author: Pratik Shrestha
-GitHub Plugin URI: outpaceseo/advance-html-sitemap
-GitHub Plugin URI: https://github.com/outpaceseo/advance-html-sitemap
 */
 
 add_shortcode('html_sitemap', 'advanced_html_sitemap_shortcode');
