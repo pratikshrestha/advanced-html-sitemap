@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Plugin Name:       Advanced HTML Sitemap
  * Description:       Generate an HTML sitemap with customizable post types, taxonomies, columns, and more.
@@ -7,14 +6,13 @@
  * Author:            Pratik Shrestha
  * License:           GPL v2 or later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain:       advance-html-sitemap
+ * Text Domain:       advanced-html-sitemap
  * Domain Path:       /languages
  */
 
 if (!defined('ABSPATH')) exit;
 
-final class Advanced_HTML_Sitemap
-{
+final class Advanced_HTML_Sitemap {
     const VERSION         = '1.0.0';
     const SHORTCODE       = 'html_sitemap';
     const OPTION_PAGE     = 'html-sitemap-generator';
@@ -147,7 +145,7 @@ final class Advanced_HTML_Sitemap
                         if ($exclude_noindex && !$this->is_indexable($post_id)) continue;
 
                         $title = get_the_title($post_id);
-                        if ($title === '') $title = __('(no title)', 'advance-html-sitemap');
+                        if ($title === '') $title = __('(no title)', 'advanced-html-sitemap');
 
                         $posts[$title] = (int) $post_id;
                     }
@@ -256,7 +254,7 @@ final class Advanced_HTML_Sitemap
     /** Front-end CSS: enqueue only when shortcode runs (no wp_head dumping). */
     private function enqueue_front_styles(): void
     {
-        $handle = 'advance-html-sitemap';
+        $handle = 'advanced-html-sitemap';
         if (!wp_style_is($handle, 'registered')) {
             wp_register_style($handle, false, [], self::VERSION);
         }
@@ -281,8 +279,8 @@ final class Advanced_HTML_Sitemap
     public function register_admin_page(): void
     {
         add_options_page(
-            __('HTML Sitemap Settings', 'advance-html-sitemap'),
-            __('HTML Sitemap', 'advance-html-sitemap'),
+            esc_html__('HTML Sitemap Settings', 'advanced-html-sitemap'),
+            esc_html__('HTML Sitemap', 'advanced-html-sitemap'),
             'manage_options',
             self::OPTION_PAGE,
             [$this, 'render_admin_page']
@@ -308,15 +306,15 @@ final class Advanced_HTML_Sitemap
 
 ?>
         <div class="wrap">
-            <h1><?php echo esc_html__('HTML Sitemap Shortcode Generator', 'advance-html-sitemap'); ?></h1>
-            <p><?php echo esc_html__('Use the options below to generate a shortcode:', 'advance-html-sitemap'); ?></p>
+            <h1><?php echo esc_html__('HTML Sitemap Shortcode Generator', 'advanced-html-sitemap'); ?></h1>
+            <p><?php echo esc_html__('Use the options below to generate a shortcode:', 'advanced-html-sitemap'); ?></p>
 
             <form id="sitemap-shortcode-generator">
-                <label><?php echo esc_html__('Post Types (comma separated):', 'advance-html-sitemap'); ?><br>
+                <label><?php echo esc_html__('Post Types (comma separated):', 'advanced-html-sitemap'); ?><br>
                     <input type="text" name="post_types" value="page,post" style="width: 400px;">
                 </label><br><br>
 
-                <label><?php echo esc_html__('Columns:', 'advance-html-sitemap'); ?><br>
+                <label><?php echo esc_html__('Columns:', 'advanced-html-sitemap'); ?><br>
                     <select name="columns">
                         <option value="1">1</option>
                         <option value="2">2</option>
@@ -324,21 +322,21 @@ final class Advanced_HTML_Sitemap
                     </select>
                 </label><br><br>
 
-                <label><?php echo esc_html__('Exclude IDs (comma separated):', 'advance-html-sitemap'); ?><br>
+                <label><?php echo esc_html__('Exclude IDs (comma separated):', 'advanced-html-sitemap'); ?><br>
                     <input type="text" name="exclude" style="width: 400px;">
                 </label><br><br>
 
-                <label><input type="checkbox" name="show_dates"> <?php echo esc_html__('Show Post Dates', 'advance-html-sitemap'); ?></label><br>
-                <label><input type="checkbox" name="hierarchical"> <?php echo esc_html__('Hierarchical Display', 'advance-html-sitemap'); ?></label><br>
-                <label><input type="checkbox" name="index" checked> <?php echo esc_html__('Show Index', 'advance-html-sitemap'); ?></label><br>
-                <label><input type="checkbox" name="exclude_noindex" checked> <?php echo esc_html__('Exclude noindex Posts', 'advance-html-sitemap'); ?></label><br><br>
+                <label><input type="checkbox" name="show_dates"> <?php echo esc_html__('Show Post Dates', 'advanced-html-sitemap'); ?></label><br>
+                <label><input type="checkbox" name="hierarchical"> <?php echo esc_html__('Hierarchical Display', 'advanced-html-sitemap'); ?></label><br>
+                <label><input type="checkbox" name="index" checked> <?php echo esc_html__('Show Index', 'advanced-html-sitemap'); ?></label><br>
+                <label><input type="checkbox" name="exclude_noindex" checked> <?php echo esc_html__('Exclude noindex Posts', 'advanced-html-sitemap'); ?></label><br><br>
 
                 <button type="button" onclick="AdvancedHTMLSitemapGenerateShortcode()" class="button button-primary">
-                    <?php echo esc_html__('Generate Shortcode', 'advance-html-sitemap'); ?>
+                    <?php echo esc_html__('Generate Shortcode', 'advanced-html-sitemap'); ?>
                 </button>
             </form>
 
-            <h2><?php echo esc_html__('Shortcode', 'advance-html-sitemap'); ?></h2>
+            <h2><?php echo esc_html__('Shortcode', 'advanced-html-sitemap'); ?></h2>
             <textarea id="generated-shortcode" rows="3" style="width: 100%;"></textarea>
         </div>
 <?php

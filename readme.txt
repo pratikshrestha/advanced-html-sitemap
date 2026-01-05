@@ -1,7 +1,6 @@
-
 === Advanced HTML Sitemap ===
-Contributors: your_name
-Tags: html sitemap, shortcode, responsive, private plugin
+Contributors: pratikshrestha
+Tags: html sitemap, shortcode, responsive
 Requires at least: 5.0
 Tested up to: 6.9
 Stable tag: 1.0.0
