@@ -3,10 +3,10 @@
 Contributors: your_name
 Tags: html sitemap, shortcode, responsive, private plugin
 Requires at least: 5.0
-Tested up to: 6.5
-Stable tag: trunk
-License: Private
-License URI: https://outpaceseo.com
+Tested up to: 6.9
+Stable tag: 1.0.0
+License: GPL v2 or later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 A responsive and customizable HTML sitemap plugin for WordPress with GitHub-powered private updates.
 
