@@ -1,0 +1,53 @@
+.advanced-html-sitemap {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.advanced-html-sitemap .sitemap-index {
+    display: flex;
+    padding: 0;
+    gap: 1em;
+}
+
+.advanced-html-sitemap.columns-1 .sitemap-section {
+    flex: 0 0 100%;
+}
+
+.advanced-html-sitemap.columns-2 .sitemap-section {
+    flex: 0 0 48%;
+}
+
+.advanced-html-sitemap.columns-3 .sitemap-section {
+    flex: 0 0 31%;
+}
+
+.advanced-html-sitemap ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.advanced-html-sitemap li {
+    margin-bottom: 6px;
+}
+
+.sitemap-index {
+    width: 100%;
+    margin-bottom: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.sitemap-index li {
+    margin-right: 10px;
+}
+
+.advanced-html-sitemap h3 {
+    margin-top: 0;
+}
+
+.advanced-html-sitemap .sitemap-section ul ul {
+    margin-left: 20px;
+}
