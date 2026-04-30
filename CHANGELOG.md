@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.0.15] - 2026-04-30
+
+### Changes
+- Update WordPress compatibility metadata for plugin details.
+
 ## [0.0.14] - 2026-04-30
 
 ### Changes

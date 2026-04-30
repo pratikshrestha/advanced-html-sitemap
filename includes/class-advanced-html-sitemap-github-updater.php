@@ -153,9 +153,9 @@ final class Advanced_HTML_Sitemap_GitHub_Updater {
 
         $defaults = [
             'version'      => '',
-            'requires'     => '',
-            'tested'       => '',
-            'requires_php' => '',
+            'requires'     => '5.8',
+            'tested'       => '6.9.4',
+            'requires_php' => '7.2',
             'description'  => '',
             'changelog'    => '',
         ];
@@ -170,9 +170,9 @@ final class Advanced_HTML_Sitemap_GitHub_Updater {
 
         $data = array_merge($defaults, [
             'version'      => $this->read_header($plugin_file, 'Version'),
-            'requires'     => $this->read_readme_value($readme, 'Requires at least'),
-            'tested'       => $this->read_readme_value($readme, 'Tested up to'),
-            'requires_php' => $this->read_readme_value($readme, 'Requires PHP'),
+            'requires'     => $this->read_readme_value($readme, 'Requires at least') ?: $defaults['requires'],
+            'tested'       => $this->read_readme_value($readme, 'Tested up to') ?: $defaults['tested'],
+            'requires_php' => $this->read_readme_value($readme, 'Requires PHP') ?: $defaults['requires_php'],
             'description'  => $this->read_readme_section($readme, 'Description'),
             'changelog'    => $this->read_readme_section($readme, 'Changelog'),
         ]);
@@ -207,9 +207,9 @@ final class Advanced_HTML_Sitemap_GitHub_Updater {
 
         $transient->no_update[$plugin] = $this->update_payload([
             'version'      => $remote_version ?: $this->installed_version(),
-            'tested'       => '',
-            'requires'     => '',
-            'requires_php' => '',
+            'tested'       => '6.9.4',
+            'requires'     => '5.8',
+            'requires_php' => '7.2',
         ]);
 
         return $transient;
