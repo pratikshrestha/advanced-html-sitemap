@@ -12,6 +12,7 @@ final class Advanced_HTML_Sitemap_Admin
     {
         add_action('admin_menu', [$this, 'register_admin_page']);
         add_action('admin_enqueue_scripts', [$this, 'admin_assets']);
+        add_filter('plugin_action_links_' . plugin_basename(AHS_FILE), [$this, 'plugin_action_links']);
     }
 
     public function register_admin_page(): void
@@ -39,6 +40,26 @@ final class Advanced_HTML_Sitemap_Admin
             $admin_js_ver,
             true
         );
+    }
+
+    public function plugin_action_links(array $links): array
+    {
+        $settings_link = sprintf(
+            '<a href="%s">%s</a>',
+            esc_url(admin_url('options-general.php?page=' . self::OPTION_PAGE)),
+            esc_html__('Settings', 'advanced-html-sitemap')
+        );
+
+        $details_link = sprintf(
+            '<a href="%s" class="thickbox open-plugin-details-modal" aria-label="%s">%s</a>',
+            esc_url(network_admin_url('plugin-install.php?tab=plugin-information&plugin=' . dirname(plugin_basename(AHS_FILE)) . '&TB_iframe=true&width=600&height=550')),
+            esc_attr__('View Advanced HTML Sitemap details', 'advanced-html-sitemap'),
+            esc_html__('View details', 'advanced-html-sitemap')
+        );
+
+        array_unshift($links, $settings_link, $details_link);
+
+        return $links;
     }
 
     public function render_admin_page(): void

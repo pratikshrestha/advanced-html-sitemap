@@ -4,7 +4,7 @@ Tags: html sitemap, sitemap, seo, navigation
 Requires at least: 5.8
 Tested up to: 6.9
 Requires PHP: 7.2
-Stable tag: 0.0.12
+Stable tag: 0.0.13
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -107,7 +107,7 @@ Yes. The plugin does not collect data, make external requests, or use cookies.
 
 == Changelog ==
 
-= 0.0.12 =
+= 0.0.13 =
 * Initial public release
 * HTML sitemap shortcode
 * Hierarchical display support
@@ -117,7 +117,7 @@ Yes. The plugin does not collect data, make external requests, or use cookies.
 
 == Upgrade Notice ==
 
-= 0.0.12 =
+= 0.0.13 =
 Initial release.
 
 == Privacy ==

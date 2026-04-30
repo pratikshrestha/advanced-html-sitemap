@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.0.13] - 2026-04-30
+
+### Changes
+- Add plugin list Settings and View details action links.
+
 ## [0.0.12] - 2026-04-30
 
 ### Changes

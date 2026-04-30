@@ -74,7 +74,7 @@ final class Advanced_HTML_Sitemap_GitHub_Updater {
             'name'          => 'Advanced HTML Sitemap',
             'slug'          => dirname(plugin_basename(AHS_FILE)),
             'version'       => $remote['version'],
-            'author'        => '<a href="' . esc_url($this->github_url()) . '">Pratik Shrestha</a>',
+            'author'        => '<a href="https://pratik-shrestha.com.np">Pratik Shrestha</a>',
             'homepage'      => $this->github_url(),
             'download_link' => $this->zip_url(),
             'requires'      => $remote['requires'],
