@@ -19,6 +19,7 @@ final class Advanced_HTML_Sitemap_GitHub_Updater {
 
     private function __construct() {
         add_filter('pre_set_site_transient_update_plugins', [$this, 'check_for_update']);
+        add_filter('site_transient_update_plugins', [$this, 'remove_stale_update_notice']);
         add_filter('plugins_api', [$this, 'plugin_info'], 20, 3);
         add_filter('upgrader_pre_download', [$this, 'download_private_package'], 10, 4);
         add_filter('upgrader_source_selection', [$this, 'rename_github_source'], 10, 4);
@@ -31,22 +32,29 @@ final class Advanced_HTML_Sitemap_GitHub_Updater {
 
         $remote = $this->get_remote_plugin_data();
 
-        if (!$remote || empty($remote['version']) || !version_compare($remote['version'], AHS_VERSION, '>')) {
-            unset($transient->response[plugin_basename(AHS_FILE)]);
+        if (!$remote || empty($remote['version']) || !version_compare($remote['version'], $this->installed_version(), '>')) {
+            return $this->mark_as_current($transient, $remote['version'] ?? '');
+        }
+
+        $transient->response[plugin_basename(AHS_FILE)] = $this->update_payload($remote);
+
+        return $transient;
+    }
+
+    public function remove_stale_update_notice($transient) {
+        if (!is_object($transient)) {
             return $transient;
         }
 
-        $transient->response[plugin_basename(AHS_FILE)] = (object) [
-            'id'          => $this->github_url(),
-            'slug'        => dirname(plugin_basename(AHS_FILE)),
-            'plugin'      => plugin_basename(AHS_FILE),
-            'new_version' => $remote['version'],
-            'url'         => $this->github_url(),
-            'package'     => $this->zip_url(),
-            'tested'      => $remote['tested'],
-            'requires'    => $remote['requires'],
-            'requires_php'=> $remote['requires_php'],
-        ];
+        $plugin = plugin_basename(AHS_FILE);
+
+        if (empty($transient->response[$plugin]->new_version)) {
+            return $transient;
+        }
+
+        if (version_compare((string) $transient->response[$plugin]->new_version, $this->installed_version(), '<=')) {
+            return $this->mark_as_current($transient, (string) $transient->response[$plugin]->new_version);
+        }
 
         return $transient;
     }
@@ -172,6 +180,51 @@ final class Advanced_HTML_Sitemap_GitHub_Updater {
         set_site_transient(self::CACHE_KEY, $data, $this->cache_ttl());
 
         return $data;
+    }
+
+    private function update_payload(array $remote): object {
+        return (object) [
+            'id'           => $this->github_url(),
+            'slug'         => dirname(plugin_basename(AHS_FILE)),
+            'plugin'       => plugin_basename(AHS_FILE),
+            'new_version'  => $remote['version'],
+            'url'          => $this->github_url(),
+            'package'      => $this->zip_url(),
+            'tested'       => $remote['tested'],
+            'requires'     => $remote['requires'],
+            'requires_php' => $remote['requires_php'],
+        ];
+    }
+
+    private function mark_as_current($transient, string $remote_version) {
+        $plugin = plugin_basename(AHS_FILE);
+
+        unset($transient->response[$plugin]);
+
+        if (!isset($transient->no_update) || !is_array($transient->no_update)) {
+            $transient->no_update = [];
+        }
+
+        $transient->no_update[$plugin] = $this->update_payload([
+            'version'      => $remote_version ?: $this->installed_version(),
+            'tested'       => '',
+            'requires'     => '',
+            'requires_php' => '',
+        ]);
+
+        return $transient;
+    }
+
+    private function installed_version(): string {
+        if (function_exists('get_file_data')) {
+            $data = get_file_data(AHS_FILE, ['Version' => 'Version'], 'plugin');
+
+            if (!empty($data['Version'])) {
+                return (string) $data['Version'];
+            }
+        }
+
+        return AHS_VERSION;
     }
 
     private function remote_get(string $url): string {

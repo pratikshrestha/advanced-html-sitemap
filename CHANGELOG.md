@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.0.12] - 2026-04-30
+
+### Changes
+- Prevent stale WordPress update notices when the installed version already matches GitHub.
+
 ## [0.0.11] - 2026-04-30
 
 ### Changes
