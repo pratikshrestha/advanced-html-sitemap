@@ -16,7 +16,7 @@ A customizable and responsive HTML sitemap plugin for WordPress, built with perf
 - Add custom CSS classes and IDs
 - Includes shortcode `[advanced_html_sitemap]` with many options
 - Developer-friendly with filters, hooks, and optional caching
-- Private GitHub-based update support
+- GitHub-based update support
 
 ---
 
@@ -33,12 +33,6 @@ https://github.com/pratikshrestha/advanced-html-sitemap
 
 The update check is cached for one hour. You can force WordPress to check again from `Dashboard > Updates`.
 
-For a private GitHub repository, add a fine-grained GitHub token with repository contents read access to `wp-config.php`:
-
-```php
-define('AHS_GITHUB_TOKEN', 'your-github-token');
-```
-
 ## 🚀 Installation
 
 ### Option 1: From ZIP File
@@ -54,36 +48,6 @@ define('AHS_GITHUB_TOKEN', 'your-github-token');
 
 Check the plugin documentation for all supported shortcode attributes.
 
----
-
-## 🚢 Deployment
-
-Build a production-ready WordPress upload ZIP:
-
-```bash
-./deploy.sh
-./deploy.sh --clean
-./deploy.sh --release
-```
-
-Output:
-
-```bash
-dist/advanced-html-sitemap-v{version}-{YYYY-MM-DD}.zip
-```
-
-Install:
-
-Upload the ZIP in WordPress Admin → Plugins → Add New → Upload Plugin.
-
-Notes:
-
-- `dist/` and `deploy.sh` are ignored in Git.
-- Version comes from an exact Git tag first, then the plugin header.
-- `CHANGELOG.md` is automatically maintained during deployment.
-
----
-
 ## 🧑‍💻 Developer Notes
 
 - Add your own filters or hooks to extend output
@@ -94,4 +58,6 @@ Notes:
 
 ## 📄 License
 
-This plugin is privately licensed and not intended for distribution via WordPress.org.
+Advanced HTML Sitemap is free software licensed under the GPL v2 or later.
+
+See [LICENSE](LICENSE) for details.
