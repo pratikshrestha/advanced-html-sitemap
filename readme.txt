@@ -108,6 +108,21 @@ Yes. The plugin does not collect data, make external requests, or use cookies.
 == Changelog ==
 
 = 0.0.15 =
+* Updated WordPress compatibility metadata for plugin details.
+
+= 0.0.14 =
+* Refreshed GitHub version metadata during WordPress update checks.
+
+= 0.0.13 =
+* Added Settings and View details links to the Plugins screen.
+
+= 0.0.12 =
+* Prevented stale WordPress update notices when the installed version already matches GitHub.
+
+= 0.0.11 =
+* Added author URI and bumped plugin version for GitHub update testing.
+
+= 0.0.1 =
 * Initial public release
 * HTML sitemap shortcode
 * Hierarchical display support
@@ -118,6 +133,21 @@ Yes. The plugin does not collect data, make external requests, or use cookies.
 == Upgrade Notice ==
 
 = 0.0.15 =
+Updates WordPress compatibility metadata shown in plugin details.
+
+= 0.0.14 =
+Improves GitHub update metadata refresh behavior.
+
+= 0.0.13 =
+Adds quick access to settings and plugin details from the Plugins screen.
+
+= 0.0.12 =
+Fixes stale update notices when versions already match.
+
+= 0.0.11 =
+Adds author URI metadata for plugin details.
+
+= 0.0.1 =
 Initial release.
 
 == Privacy ==
