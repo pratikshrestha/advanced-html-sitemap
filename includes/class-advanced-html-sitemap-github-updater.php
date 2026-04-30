@@ -30,7 +30,7 @@ final class Advanced_HTML_Sitemap_GitHub_Updater {
             return $transient;
         }
 
-        $remote = $this->get_remote_plugin_data();
+        $remote = $this->get_remote_plugin_data(true);
 
         if (!$remote || empty($remote['version']) || !version_compare($remote['version'], $this->installed_version(), '>')) {
             return $this->mark_as_current($transient, $remote['version'] ?? '');
@@ -64,7 +64,7 @@ final class Advanced_HTML_Sitemap_GitHub_Updater {
             return $result;
         }
 
-        $remote = $this->get_remote_plugin_data();
+        $remote = $this->get_remote_plugin_data(true);
 
         if (!$remote) {
             return $result;
@@ -144,8 +144,8 @@ final class Advanced_HTML_Sitemap_GitHub_Updater {
         return $download_file;
     }
 
-    private function get_remote_plugin_data(): array {
-        $cached = get_site_transient(self::CACHE_KEY);
+    private function get_remote_plugin_data(bool $force_refresh = false): array {
+        $cached = $force_refresh ? false : get_site_transient(self::CACHE_KEY);
 
         if (is_array($cached)) {
             return $cached;

@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.0.14] - 2026-04-30
+
+### Changes
+- Refresh GitHub version metadata during WordPress update checks.
+
 ## [0.0.13] - 2026-04-30
 
 ### Changes
