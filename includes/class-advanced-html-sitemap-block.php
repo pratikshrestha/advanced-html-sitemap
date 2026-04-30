@@ -3,21 +3,24 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-final class Advanced_HTML_Sitemap_Block {
+final class Advanced_HTML_Sitemap_Block
+{
 
     /**
      * Block name.
      */
     private const BLOCK_NAME = 'advanced-html-sitemap/block';
 
-    public function __construct() {
+    public function __construct()
+    {
         add_action('init', [$this, 'register']);
     }
 
     /**
      * Register editor script + dynamic block.
      */
-    public function register(): void {
+    public function register(): void
+    {
         // Editor JS
         $js_rel  = 'assets/js/block.js';
         $js_path = AHS_DIR . ltrim($js_rel, '/');
@@ -26,9 +29,17 @@ final class Advanced_HTML_Sitemap_Block {
         wp_register_script(
             'advanced-html-sitemap-block',
             plugins_url($js_rel, AHS_FILE),
-            ['wp-blocks', 'wp-element', 'wp-i18n', 'wp-block-editor', 'wp-components'],
+            ['wp-blocks', 'wp-element', 'wp-i18n', 'wp-block-editor', 'wp-components', 'wp-server-side-render'],
             $js_ver,
             true
+        );
+
+        $post_types = get_post_types(['public' => true, 'show_ui' => true], 'names');
+
+        wp_localize_script(
+            'advanced-html-sitemap-block',
+            'AHS_BLOCK_POST_TYPES',
+            array_values($post_types)
         );
 
         register_block_type(self::BLOCK_NAME, [
@@ -39,11 +50,11 @@ final class Advanced_HTML_Sitemap_Block {
                 'postTypes'      => ['type' => 'array',  'default' => ['page', 'post'], 'items' => ['type' => 'string']],
                 'columns'        => ['type' => 'number', 'default' => 1],
                 'exclude'        => ['type' => 'string', 'default' => ''],
-                'showDates'      => ['type' => 'boolean','default' => false],
-                'hierarchical'   => ['type' => 'boolean','default' => false],
-                'index'          => ['type' => 'boolean','default' => false],
-                'excludeNoindex' => ['type' => 'boolean','default' => true],
-                'cache'          => ['type' => 'boolean','default' => true],
+                'showDates'      => ['type' => 'boolean', 'default' => false],
+                'hierarchical'   => ['type' => 'boolean', 'default' => false],
+                'index'          => ['type' => 'boolean', 'default' => false],
+                'excludeNoindex' => ['type' => 'boolean', 'default' => true],
+                'cache'          => ['type' => 'boolean', 'default' => true],
             ],
         ]);
     }
@@ -51,7 +62,13 @@ final class Advanced_HTML_Sitemap_Block {
     /**
      * Dynamic render callback. Delegates to shortcode for a single source of truth.
      */
-    public function render(array $attributes, string $content = ''): string {
+    public function render(array $attributes, string $content = ''): string
+    {
+        if (defined('REST_REQUEST') && REST_REQUEST) {
+            $attributes['cache'] = false;
+        }
+
+
         $post_types = !empty($attributes['postTypes'])
             ? implode(',', array_map('sanitize_key', (array) $attributes['postTypes']))
             : 'page,post';

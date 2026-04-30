@@ -151,7 +151,7 @@ final class Advanced_HTML_Sitemap_Renderer
                 $label = $obj ? $obj->labels->name : ucfirst($post_type);
 
                 echo '<div class="sitemap-section" id="sitemap-' . esc_attr($post_type) . '">';
-                echo '<h3>' . esc_html($label) . '</h3>';
+                echo '<h2 class="sitemap-heading">' . esc_html($label) . '</h2>';
 
                 do_action('ahs_before_section', $post_type, $atts);
                 do_action('advanced_html_sitemap_before_section', $post_type, $atts);
@@ -245,7 +245,7 @@ final class Advanced_HTML_Sitemap_Renderer
             'ul'    => ['class' => true],
             'li'    => ['class' => true],
             'a'     => ['href' => true, 'title' => true, 'class' => true],
-            'h3'    => ['class' => true],
+            'h2'    => ['class' => true],
             'small' => [],
         ];
 

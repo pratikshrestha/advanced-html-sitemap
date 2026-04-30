@@ -4,7 +4,7 @@ Tags: html sitemap, sitemap, seo, navigation
 Requires at least: 5.8
 Tested up to: 6.9
 Requires PHP: 7.2
-Stable tag: 1.0.0
+Stable tag: 0.0.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -58,6 +58,10 @@ This keeps your HTML sitemap aligned with your SEO strategy and avoids exposing 
 * Safe HTML output using allow-listed tags
 * Easy to extend for Pro or custom integrations
 
+= GitHub Updates =
+Checks the GitHub main branch for a newer plugin version and shows the update in the WordPress dashboard when the remote version is higher than the installed version.
+Private repositories can be checked by defining AHS_GITHUB_TOKEN in wp-config.php with repository contents read access.
+
 = Admin Shortcode Generator =
 * Built-in admin page to generate shortcodes
 * No complex settings pages
@@ -103,7 +107,7 @@ Yes. The plugin does not collect data, make external requests, or use cookies.
 
 == Changelog ==
 
-= 1.0.0 =
+= 0.0.1 =
 * Initial public release
 * HTML sitemap shortcode
 * Hierarchical display support
@@ -113,9 +117,9 @@ Yes. The plugin does not collect data, make external requests, or use cookies.
 
 == Upgrade Notice ==
 
-= 1.0.0 =
+= 0.0.1 =
 Initial release.
 
 == Privacy ==
 
-Advanced HTML Sitemap does not collect, store, or transmit any personal data. It makes no external requests and includes no tracking or analytics.
+Advanced HTML Sitemap does not collect, store, or transmit any personal data and includes no tracking or analytics. In the WordPress admin, it can request plugin version metadata from GitHub to support dashboard updates.

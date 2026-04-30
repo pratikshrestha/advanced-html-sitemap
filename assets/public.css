@@ -1,15 +1,16 @@
-.advanced-html-sitemap {
+/* .advanced-html-sitemap ul{
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
-}
+} */
 
 .advanced-html-sitemap .sitemap-index {
     display: flex;
     padding: 0;
     gap: 1em;
+    list-style-type: none;
 }
-
+/* 
 .advanced-html-sitemap.columns-1 .sitemap-section {
     flex: 0 0 100%;
 }
@@ -50,4 +51,4 @@
 
 .advanced-html-sitemap .sitemap-section ul ul {
     margin-left: 20px;
-}
+} */

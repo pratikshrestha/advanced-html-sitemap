@@ -20,10 +20,29 @@ A customizable and responsive HTML sitemap plugin for WordPress, built with perf
 
 ---
 
+## 🔄 GitHub Updates
+
+This plugin checks the `main` branch on GitHub for the version in `advanced-html-sitemap.php`.
+When the version on GitHub is higher than the installed version, WordPress will show a plugin update in the dashboard.
+
+Default update source:
+
+```php
+https://github.com/pratikshrestha/advanced-html-sitemap
+```
+
+The update check is cached for one hour. You can force WordPress to check again from `Dashboard > Updates`.
+
+For a private GitHub repository, add a fine-grained GitHub token with repository contents read access to `wp-config.php`:
+
+```php
+define('AHS_GITHUB_TOKEN', 'your-github-token');
+```
+
 ## 🚀 Installation
 
 ### Option 1: From ZIP File
-1. Download the latest plugin ZIP from GitHub [Releases](https://github.com/outpaceseo/advanced-html-sitemap/releases).
+1. Download the latest plugin ZIP from GitHub [Releases](https://github.com/pratikshrestha/advanced-html-sitemap/releases).
 2. In your WordPress dashboard, go to `Plugins > Add New > Upload Plugin`.
 3. Upload the ZIP file and activate the plugin.
 
@@ -34,6 +53,34 @@ A customizable and responsive HTML sitemap plugin for WordPress, built with perf
 ```
 
 Check the plugin documentation for all supported shortcode attributes.
+
+---
+
+## 🚢 Deployment
+
+Build a production-ready WordPress upload ZIP:
+
+```bash
+./deploy.sh
+./deploy.sh --clean
+./deploy.sh --release
+```
+
+Output:
+
+```bash
+dist/advanced-html-sitemap-v{version}-{YYYY-MM-DD}.zip
+```
+
+Install:
+
+Upload the ZIP in WordPress Admin → Plugins → Add New → Upload Plugin.
+
+Notes:
+
+- `dist/` and `deploy.sh` are ignored in Git.
+- Version comes from an exact Git tag first, then the plugin header.
+- `CHANGELOG.md` is automatically maintained during deployment.
 
 ---
 
