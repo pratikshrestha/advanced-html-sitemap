@@ -4,7 +4,7 @@ Tags: html sitemap, sitemap, seo, navigation
 Requires at least: 5.8
 Tested up to: 6.9.4
 Requires PHP: 7.2
-Stable tag: 0.0.15
+Stable tag: 0.0.16
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -107,6 +107,9 @@ Yes. The plugin does not collect data, make external requests, or use cookies.
 
 == Changelog ==
 
+= 0.0.16 =
+* Removed duplicate View details link from the Plugins screen.
+
 = 0.0.15 =
 * Updated WordPress compatibility metadata for plugin details.
 
@@ -131,6 +134,9 @@ Yes. The plugin does not collect data, make external requests, or use cookies.
 * Admin shortcode generator
 
 == Upgrade Notice ==
+
+= 0.0.16 =
+Removes the duplicate View details action link.
 
 = 0.0.15 =
 Updates WordPress compatibility metadata shown in plugin details.

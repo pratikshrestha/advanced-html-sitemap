@@ -50,14 +50,7 @@ final class Advanced_HTML_Sitemap_Admin
             esc_html__('Settings', 'advanced-html-sitemap')
         );
 
-        $details_link = sprintf(
-            '<a href="%s" class="thickbox open-plugin-details-modal" aria-label="%s">%s</a>',
-            esc_url(network_admin_url('plugin-install.php?tab=plugin-information&plugin=' . dirname(plugin_basename(AHS_FILE)) . '&TB_iframe=true&width=600&height=550')),
-            esc_attr__('View Advanced HTML Sitemap details', 'advanced-html-sitemap'),
-            esc_html__('View details', 'advanced-html-sitemap')
-        );
-
-        array_unshift($links, $settings_link, $details_link);
+        array_unshift($links, $settings_link);
 
         return $links;
     }

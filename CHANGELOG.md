@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.0.16] - 2026-04-30
+
+### Changes
+- Remove duplicate View details link from the Plugins screen.
+
 ## [0.0.15] - 2026-04-30
 
 ### Changes
