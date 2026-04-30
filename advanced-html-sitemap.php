@@ -2,8 +2,9 @@
 /**
  * Plugin Name:       Advanced HTML Sitemap
  * Description:       Generate an HTML sitemap with customizable post types, taxonomies, columns, and more.
- * Version:           0.0.1
+ * Version:           0.0.11
  * Author:            Pratik Shrestha
+ * Author URI:        https://pratik-shrestha.com.np
  * License:           GPL v2 or later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
  * Update URI:        https://github.com/pratikshrestha/advanced-html-sitemap
@@ -15,7 +16,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-define('AHS_VERSION', '0.0.1');
+define('AHS_VERSION', '0.0.11');
 define('AHS_FILE', __FILE__);
 define('AHS_DIR', plugin_dir_path(__FILE__));
 define('AHS_URL', plugin_dir_url(__FILE__));
