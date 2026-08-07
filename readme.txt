@@ -4,7 +4,7 @@ Tags: html sitemap, sitemap, seo, navigation
 Requires at least: 5.8
 Tested up to: 6.9.4
 Requires PHP: 7.2
-Stable tag: 0.0.17
+Stable tag: 0.0.18
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -109,6 +109,9 @@ Yes. The plugin does not collect data, make external requests, or use cookies.
 
 == Changelog ==
 
+= 0.0.18 =
+* Fixed cached sitemaps rendering without the plugin stylesheet, which stopped the column layout from applying.
+
 = 0.0.17 =
 * Added a taxonomies option that lists term archives as their own sitemap sections.
 * Added taxonomy selection to the shortcode generator and the block inspector.
@@ -141,6 +144,9 @@ Yes. The plugin does not collect data, make external requests, or use cookies.
 * Admin shortcode generator
 
 == Upgrade Notice ==
+
+= 0.0.18 =
+Fixes the column layout not applying on cached sitemaps.
 
 = 0.0.17 =
 Adds taxonomy sections to the sitemap and fixes the front-end stylesheet not loading.

@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.0.18] - 2026-08-07
+
+### Changes
+- Enqueue the front-end stylesheet before the cache check. A cached sitemap returned early and never enqueued its CSS, so every visit after the first was unstyled and the column layout had no effect.
+
 ## [0.0.17] - 2026-08-07
 
 ### Changes

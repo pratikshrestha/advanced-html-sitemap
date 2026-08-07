@@ -98,6 +98,13 @@ final class Advanced_HTML_Sitemap_Renderer
         $hide_empty_terms = filter_var($atts['hide_empty_terms'], FILTER_VALIDATE_BOOLEAN);
         $show_counts      = filter_var($atts['show_counts'], FILTER_VALIDATE_BOOLEAN);
 
+        // Enqueue stylesheet (registered on wp_enqueue_scripts in register_public_assets).
+        // This must happen before the cache check: a cache hit returns early, and skipping
+        // the enqueue there would serve cached markup with no stylesheet attached.
+        if (!$disable_css) {
+            wp_enqueue_style('advanced-html-sitemap-public');
+        }
+
         // Cache
         $cache_key = $this->cache_key($atts);
 
@@ -106,11 +113,6 @@ final class Advanced_HTML_Sitemap_Renderer
             if ($cached !== false) {
                 return (string) wp_kses((string) $cached, $this->allowed_html());
             }
-        }
-
-        // Enqueue stylesheet (must be registered early on wp_enqueue_scripts in main plugin)
-        if (!$disable_css) {
-            wp_enqueue_style('advanced-html-sitemap-public');
         }
 
         ob_start();
