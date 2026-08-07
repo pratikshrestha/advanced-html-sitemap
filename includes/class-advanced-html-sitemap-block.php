@@ -42,14 +42,25 @@ final class Advanced_HTML_Sitemap_Block
             array_values($post_types)
         );
 
+        $taxonomies = get_taxonomies(['public' => true, 'show_ui' => true], 'names');
+
+        wp_localize_script(
+            'advanced-html-sitemap-block',
+            'AHS_BLOCK_TAXONOMIES',
+            array_values($taxonomies)
+        );
+
         register_block_type(self::BLOCK_NAME, [
             'api_version'     => 2,
             'editor_script'   => 'advanced-html-sitemap-block',
             'render_callback' => [$this, 'render'],
             'attributes'      => [
                 'postTypes'      => ['type' => 'array',  'default' => ['page', 'post'], 'items' => ['type' => 'string']],
+                'taxonomies'     => ['type' => 'array',  'default' => [], 'items' => ['type' => 'string']],
                 'columns'        => ['type' => 'number', 'default' => 1],
                 'exclude'        => ['type' => 'string', 'default' => ''],
+                'showCounts'     => ['type' => 'boolean', 'default' => false],
+                'hideEmptyTerms' => ['type' => 'boolean', 'default' => true],
                 'showDates'      => ['type' => 'boolean', 'default' => false],
                 'hierarchical'   => ['type' => 'boolean', 'default' => false],
                 'index'          => ['type' => 'boolean', 'default' => false],
@@ -73,6 +84,10 @@ final class Advanced_HTML_Sitemap_Block
             ? implode(',', array_map('sanitize_key', (array) $attributes['postTypes']))
             : 'page,post';
 
+        $taxonomies = !empty($attributes['taxonomies'])
+            ? implode(',', array_map('sanitize_key', (array) $attributes['taxonomies']))
+            : '';
+
         $columns = isset($attributes['columns'])
             ? (string) max(1, min(3, (int) $attributes['columns']))
             : '1';
@@ -81,8 +96,11 @@ final class Advanced_HTML_Sitemap_Block
 
         $atts = [
             'post_types'      => $post_types,
+            'taxonomies'      => $taxonomies,
             'columns'         => $columns,
             'exclude'         => $exclude,
+            'show_counts'     => !empty($attributes['showCounts']) ? 'true' : 'false',
+            'hide_empty_terms' => !isset($attributes['hideEmptyTerms']) || !empty($attributes['hideEmptyTerms']) ? 'true' : 'false',
             'show_dates'      => !empty($attributes['showDates']) ? 'true' : 'false',
             'hierarchical'    => !empty($attributes['hierarchical']) ? 'true' : 'false',
             'index'           => !empty($attributes['index']) ? 'true' : 'false',

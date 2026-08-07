@@ -4,7 +4,7 @@ Tags: html sitemap, sitemap, seo, navigation
 Requires at least: 5.8
 Tested up to: 6.9.4
 Requires PHP: 7.2
-Stable tag: 0.0.16
+Stable tag: 0.0.17
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -23,12 +23,14 @@ It works seamlessly alongside popular SEO plugins and automatically excludes con
 = Flexible Sitemap Generation =
 * Generate HTML sitemaps using a simple shortcode
 * Include pages, posts, and custom post types
+* Include taxonomy term archives (categories, tags, and custom taxonomies)
 * Choose 1, 2, or 3 column layouts
 * Optional hierarchical (parent → child) display
 * Alphabetical ordering by title
 
 = Smart Exclusions & Filtering =
 * Exclude specific posts or pages by ID
+* Exclude specific taxonomy terms by ID, or hide terms with no posts
 * Automatically exclude unpublished or non-public content
 * Optional taxonomy and term filtering
 * Built-in caching for better performance
@@ -107,6 +109,11 @@ Yes. The plugin does not collect data, make external requests, or use cookies.
 
 == Changelog ==
 
+= 0.0.17 =
+* Added a taxonomies option that lists term archives as their own sitemap sections.
+* Added taxonomy selection to the shortcode generator and the block inspector.
+* Fixed the front-end stylesheet never loading, which also broke the column layout.
+
 = 0.0.16 =
 * Removed duplicate View details link from the Plugins screen.
 
@@ -134,6 +141,9 @@ Yes. The plugin does not collect data, make external requests, or use cookies.
 * Admin shortcode generator
 
 == Upgrade Notice ==
+
+= 0.0.17 =
+Adds taxonomy sections to the sitemap and fixes the front-end stylesheet not loading.
 
 = 0.0.16 =
 Removes the duplicate View details action link.

@@ -13,10 +13,17 @@
             attrs.push(`post_types="${postTypes.join(",")}"`);
         }
 
+        // Collect checked taxonomies
+        const taxonomyChecks = form.querySelectorAll('input[name="taxonomies[]"]:checked');
+        if (taxonomyChecks.length) {
+            const taxonomies = Array.from(taxonomyChecks).map(el => el.value);
+            attrs.push(`taxonomies="${taxonomies.join(",")}"`);
+        }
+
         // Collect other fields
         const inputs = form.querySelectorAll("input, select");
         inputs.forEach((el) => {
-            if (!el.name || el.name === "post_types[]") return;
+            if (!el.name || el.name === "post_types[]" || el.name === "taxonomies[]") return;
 
             if (el.type === "checkbox") {
                 attrs.push(`${el.name}="${el.checked ? "true" : "false"}"`);

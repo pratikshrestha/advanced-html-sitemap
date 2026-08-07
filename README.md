@@ -43,8 +43,20 @@ The update check is cached for one hour. You can force WordPress to check again 
 ## 🔧 Shortcode Usage
 
 ```bash
-[advanced_html_sitemap post_types="post,page" taxonomies="category,post_tag" include_post_ids="1,2,3"]
+[advanced_html_sitemap post_types="post,page" taxonomies="category,post_tag" columns="2"]
 ```
+
+### Taxonomy attributes
+
+| Attribute | Default | Description |
+| --- | --- | --- |
+| `taxonomies` | *(empty)* | Comma-separated taxonomies to list as their own sitemap sections, e.g. `category,post_tag`. |
+| `exclude_terms` | *(empty)* | Comma-separated term IDs to leave out. |
+| `hide_empty_terms` | `true` | Skip terms that have no posts. |
+| `show_counts` | `false` | Append the post count to each term. |
+| `hierarchical` | `false` | Also nests child terms under their parent for hierarchical taxonomies. |
+
+`taxonomy` and `term` remain a *filter* on the post-type sections — they narrow which posts are listed, and are unrelated to `taxonomies`.
 
 Check the plugin documentation for all supported shortcode attributes.
 

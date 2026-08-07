@@ -36,5 +36,10 @@ final class Advanced_HTML_Sitemap {
         add_action('save_post', [$this->renderer, 'maybe_flush_cache'], 10, 2);
         add_action('deleted_post', [$this->renderer, 'flush_all_cache']);
         add_action('trashed_post', [$this->renderer, 'flush_all_cache']);
+
+        // Flush cache on taxonomy term changes
+        add_action('created_term', [$this->renderer, 'flush_all_cache']);
+        add_action('edited_term', [$this->renderer, 'flush_all_cache']);
+        add_action('delete_term', [$this->renderer, 'flush_all_cache']);
     }
 }

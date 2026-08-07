@@ -68,6 +68,14 @@ final class Advanced_HTML_Sitemap_Admin
             ],
             'objects'
         );
+
+        $taxonomies = get_taxonomies(
+            [
+                'public'  => true,
+                'show_ui' => true,
+            ],
+            'objects'
+        );
 ?>
         <div class="wrap">
             <h1><?php echo esc_html__('Advanced HTML Sitemap Shortcode Generator', 'advanced-html-sitemap'); ?></h1>
@@ -103,6 +111,35 @@ final class Advanced_HTML_Sitemap_Admin
 
                                     <p class="description">
                                         <?php echo esc_html__('Choose which post types to include in the sitemap.', 'advanced-html-sitemap'); ?>
+                                    </p>
+                                </fieldset>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row">
+                                <label><?php echo esc_html__('Taxonomies', 'advanced-html-sitemap'); ?></label>
+                            </th>
+                            <td>
+                                <fieldset>
+                                    <legend class="screen-reader-text">
+                                        <?php echo esc_html__('Taxonomies', 'advanced-html-sitemap'); ?>
+                                    </legend>
+
+                                    <?php foreach ($taxonomies as $taxonomy) : ?>
+                                        <label>
+                                            <input
+                                                type="checkbox"
+                                                name="taxonomies[]"
+                                                value="<?php echo esc_attr($taxonomy->name); ?>">
+                                            <?php echo esc_html($taxonomy->labels->singular_name); ?>
+                                            <span class="description">(<?php echo esc_html($taxonomy->name); ?>)</span>
+                                        </label>
+                                        <br>
+                                    <?php endforeach; ?>
+
+                                    <p class="description">
+                                        <?php echo esc_html__('Adds a section listing the term archives (e.g. categories or tags) for each selected taxonomy.', 'advanced-html-sitemap'); ?>
                                     </p>
                                 </fieldset>
                             </td>
@@ -170,6 +207,18 @@ final class Advanced_HTML_Sitemap_Admin
                                     <label>
                                         <input type="checkbox" name="exclude_noindex" value="true" checked>
                                         <?php echo esc_html__('Exclude noindex content', 'advanced-html-sitemap'); ?>
+                                    </label>
+                                    <br>
+
+                                    <label>
+                                        <input type="checkbox" name="show_counts" value="true">
+                                        <?php echo esc_html__('Show term post counts', 'advanced-html-sitemap'); ?>
+                                    </label>
+                                    <br>
+
+                                    <label>
+                                        <input type="checkbox" name="hide_empty_terms" value="true" checked>
+                                        <?php echo esc_html__('Hide terms with no posts', 'advanced-html-sitemap'); ?>
                                     </label>
                                     <br>
 

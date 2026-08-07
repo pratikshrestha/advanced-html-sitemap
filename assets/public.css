@@ -1,54 +1,55 @@
-/* .advanced-html-sitemap ul{
+.advanced-html-sitemap {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 24px 40px;
+}
+
+.advanced-html-sitemap.columns-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.advanced-html-sitemap.columns-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+/* The index spans the full width regardless of the column count. */
+.advanced-html-sitemap .sitemap-index {
+    grid-column: 1 / -1;
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
-} */
-
-.advanced-html-sitemap .sitemap-index {
-    display: flex;
-    padding: 0;
     gap: 1em;
-    list-style-type: none;
-}
-/* 
-.advanced-html-sitemap.columns-1 .sitemap-section {
-    flex: 0 0 100%;
+    margin: 0 0 4px;
+    padding: 0;
+    list-style: none;
 }
 
-.advanced-html-sitemap.columns-2 .sitemap-section {
-    flex: 0 0 48%;
+.advanced-html-sitemap .sitemap-section {
+    min-width: 0;
 }
 
-.advanced-html-sitemap.columns-3 .sitemap-section {
-    flex: 0 0 31%;
+.advanced-html-sitemap .sitemap-heading {
+    margin-top: 0;
 }
 
 .advanced-html-sitemap ul {
-    list-style: none;
-    padding: 0;
     margin: 0;
+    padding: 0;
+    list-style: none;
 }
 
 .advanced-html-sitemap li {
     margin-bottom: 6px;
 }
 
-.sitemap-index {
-    width: 100%;
-    margin-bottom: 20px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
-}
-
-.sitemap-index li {
-    margin-right: 10px;
-}
-
-.advanced-html-sitemap h3 {
-    margin-top: 0;
-}
-
 .advanced-html-sitemap .sitemap-section ul ul {
+    margin-top: 6px;
     margin-left: 20px;
-} */
+}
+
+@media (max-width: 782px) {
+
+    .advanced-html-sitemap.columns-2,
+    .advanced-html-sitemap.columns-3 {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}

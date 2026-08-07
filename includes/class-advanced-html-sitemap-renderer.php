@@ -28,6 +28,10 @@ final class Advanced_HTML_Sitemap_Renderer
             'columns'         => '1',
             'taxonomy'        => '',
             'term'            => '',
+            'taxonomies'      => '',
+            'exclude_terms'   => '',
+            'hide_empty_terms' => 'true',
+            'show_counts'     => 'false',
             'limit'           => -1,
             'exclude'         => '',
             'show_dates'      => 'false',
@@ -82,6 +86,18 @@ final class Advanced_HTML_Sitemap_Renderer
         $taxonomy = $atts['taxonomy'] !== '' ? sanitize_key($atts['taxonomy']) : '';
         $term     = $atts['term'] !== '' ? sanitize_title($atts['term']) : '';
 
+        // Taxonomies listed as their own sitemap sections (term archives).
+        $taxonomies = array_values(array_filter(
+            array_map('sanitize_key', array_map('trim', explode(',', (string) $atts['taxonomies']))),
+            static function ($tax) {
+                return $tax !== '' && taxonomy_exists($tax);
+            }
+        ));
+
+        $exclude_term_ids = array_map('intval', array_filter(explode(',', (string) $atts['exclude_terms'])));
+        $hide_empty_terms = filter_var($atts['hide_empty_terms'], FILTER_VALIDATE_BOOLEAN);
+        $show_counts      = filter_var($atts['show_counts'], FILTER_VALIDATE_BOOLEAN);
+
         // Cache
         $cache_key = $this->cache_key($atts);
 
@@ -108,6 +124,12 @@ final class Advanced_HTML_Sitemap_Renderer
                 $obj = get_post_type_object($post_type);
                 if ($obj) {
                     echo '<li><a href="#sitemap-' . esc_attr($post_type) . '">' . esc_html($obj->labels->name) . '</a></li>';
+                }
+            }
+            foreach ($taxonomies as $taxonomy_slug) {
+                $tax_obj = get_taxonomy($taxonomy_slug);
+                if ($tax_obj) {
+                    echo '<li><a href="#sitemap-tax-' . esc_attr($taxonomy_slug) . '">' . esc_html($tax_obj->labels->name) . '</a></li>';
                 }
             }
             echo '</ul>';
@@ -220,6 +242,61 @@ final class Advanced_HTML_Sitemap_Renderer
             }
 
             wp_reset_postdata();
+        }
+
+        foreach ($taxonomies as $taxonomy_slug) {
+
+            $term_args = [
+                'taxonomy'   => $taxonomy_slug,
+                'hide_empty' => $hide_empty_terms,
+                'orderby'    => 'name',
+                'order'      => 'ASC',
+            ];
+
+            // Only add exclusion when needed (avoids NOT IN () patterns)
+            if (!empty($exclude_term_ids)) {
+                $term_args['exclude'] = $exclude_term_ids;
+            }
+
+            if ($limit > 0) {
+                $term_args['number'] = $limit;
+            }
+
+            $term_args = apply_filters('ahs_term_query_args', $term_args, $taxonomy_slug, $atts);
+            $term_args = apply_filters('advanced_html_sitemap_term_query_args', $term_args, $taxonomy_slug, $atts);
+
+            $terms = get_terms($term_args);
+
+            if (is_wp_error($terms) || empty($terms)) {
+                continue;
+            }
+
+            $tax_obj   = get_taxonomy($taxonomy_slug);
+            $tax_label = $tax_obj ? $tax_obj->labels->name : ucfirst($taxonomy_slug);
+
+            echo '<div class="sitemap-section" id="sitemap-tax-' . esc_attr($taxonomy_slug) . '">';
+            echo '<h2 class="sitemap-heading">' . esc_html($tax_label) . '</h2>';
+
+            do_action('ahs_before_term_section', $taxonomy_slug, $atts);
+            do_action('advanced_html_sitemap_before_term_section', $taxonomy_slug, $atts);
+
+            echo '<ul>';
+
+            if ($hierarchical && is_taxonomy_hierarchical($taxonomy_slug)) {
+                $tree_html = $this->build_term_tree($terms, 0, $show_counts, $atts, true);
+                echo wp_kses($tree_html, $this->allowed_html());
+            } else {
+                foreach ($terms as $term_obj) {
+                    echo wp_kses($this->term_item_html($term_obj, $show_counts, $atts), $this->allowed_html());
+                }
+            }
+
+            echo '</ul>';
+
+            do_action('ahs_after_term_section', $taxonomy_slug, $atts);
+            do_action('advanced_html_sitemap_after_term_section', $taxonomy_slug, $atts);
+
+            echo '</div>';
         }
 
         echo '</div>';
@@ -396,6 +473,72 @@ final class Advanced_HTML_Sitemap_Renderer
     }
 
     /**
+     * Build a single term list item (optionally wrapping a nested child list).
+     */
+    private function term_item_html($term_obj, bool $show_counts, array $atts, string $children_html = ''): string
+    {
+        $link = get_term_link($term_obj);
+        if (is_wp_error($link)) {
+            return '';
+        }
+
+        $item_html = '<li><a href="' . esc_url($link) . '">' . esc_html($term_obj->name);
+        if ($show_counts) {
+            $item_html .= ' <small>(' . esc_html(number_format_i18n((int) $term_obj->count)) . ')</small>';
+        }
+        $item_html .= '</a>' . $children_html . '</li>';
+
+        $item_html = apply_filters('ahs_term_item_html', $item_html, $term_obj, $term_obj->taxonomy, $atts);
+        return (string) apply_filters('advanced_html_sitemap_term_item_html', $item_html, $term_obj, $term_obj->taxonomy, $atts);
+    }
+
+    /**
+     * Build a hierarchical term list.
+     * If $top_level=true, we output only <li>...</li> (outer <ul> is already printed).
+     */
+    private function build_term_tree(array $terms, int $parent_id = 0, bool $show_counts = false, array $atts = [], bool $top_level = false): string
+    {
+
+        $known_ids = [];
+        foreach ($terms as $t) {
+            $known_ids[(int) $t->term_id] = true;
+        }
+
+        $children = array_filter($terms, static function ($t) use ($parent_id, $known_ids, $top_level) {
+            $parent = (int) $t->parent;
+
+            // A hidden (e.g. empty) parent would orphan its children, so surface them at the top level.
+            if ($top_level && $parent > 0 && !isset($known_ids[$parent])) {
+                return true;
+            }
+
+            return $parent === $parent_id;
+        });
+
+        if (empty($children)) {
+            return '';
+        }
+
+        usort($children, static fn($a, $b) => strcasecmp($a->name, $b->name));
+
+        $out = '';
+        if (!$top_level) {
+            $out .= '<ul>';
+        }
+
+        foreach ($children as $child) {
+            $sub_html = $this->build_term_tree($terms, (int) $child->term_id, $show_counts, $atts, false);
+            $out     .= $this->term_item_html($child, $show_counts, $atts, $sub_html);
+        }
+
+        if (!$top_level) {
+            $out .= '</ul>';
+        }
+
+        return $out;
+    }
+
+    /**
      * Register the front-end stylesheet.
      */
     public function register_public_assets(): void
@@ -406,7 +549,7 @@ final class Advanced_HTML_Sitemap_Renderer
         $css_path = AHS_DIR . $css_rel;
         $css_ver  = file_exists($css_path) ? filemtime($css_path) : AHS_VERSION;
 
-        wp_register_style($handle, $css_path, [], $css_ver);
+        wp_register_style($handle, AHS_URL . $css_rel, [], $css_ver);
     }
 
     private function cache_key(array $atts): string

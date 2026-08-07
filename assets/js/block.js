@@ -26,8 +26,11 @@
         category: "widgets",
         attributes: {
             postTypes: { type: "array", default: ["page", "post"] },
+            taxonomies: { type: "array", default: [] },
             columns: { type: "number", default: 1 },
             exclude: { type: "string", default: "" },
+            showCounts: { type: "boolean", default: false },
+            hideEmptyTerms: { type: "boolean", default: true },
             showDates: { type: "boolean", default: false },
             hierarchical: { type: "boolean", default: false },
             index: { type: "boolean", default: false },
@@ -50,6 +53,19 @@
                     : current.filter((x) => x !== slug);
 
                 setAttributes({ postTypes: next.length ? next : ["page", "post"] });
+            }
+
+            const availableTaxonomies = (window.AHS_BLOCK_TAXONOMIES && Array.isArray(window.AHS_BLOCK_TAXONOMIES))
+                ? window.AHS_BLOCK_TAXONOMIES
+                : [];
+
+            function toggleTaxonomy(slug, checked) {
+                const current = Array.isArray(attrs.taxonomies) ? attrs.taxonomies.slice() : [];
+                const next = checked
+                    ? Array.from(new Set(current.concat([slug])))
+                    : current.filter((x) => x !== slug);
+
+                setAttributes({ taxonomies: next });
             }
 
             return [
@@ -79,6 +95,30 @@
                                 onChange: (checked) => togglePostType(pt, checked),
                             })
                         ),
+                        availableTaxonomies.length
+                            ? el("p", { style: { marginTop: "12px", fontWeight: 600 } }, __("Taxonomies", "advanced-html-sitemap"))
+                            : null,
+                        availableTaxonomies.map((tax) =>
+                            el(CheckboxControl, {
+                                label: tax,
+                                checked: (attrs.taxonomies || []).includes(tax),
+                                onChange: (checked) => toggleTaxonomy(tax, checked),
+                            })
+                        ),
+                        (attrs.taxonomies || []).length
+                            ? el(ToggleControl, {
+                                label: __("Show term post counts", "advanced-html-sitemap"),
+                                checked: !!attrs.showCounts,
+                                onChange: (v) => setAttributes({ showCounts: v }),
+                            })
+                            : null,
+                        (attrs.taxonomies || []).length
+                            ? el(ToggleControl, {
+                                label: __("Hide terms with no posts", "advanced-html-sitemap"),
+                                checked: !!attrs.hideEmptyTerms,
+                                onChange: (v) => setAttributes({ hideEmptyTerms: v }),
+                            })
+                            : null,
                         el(ToggleControl, {
                             label: __("Show index links", "advanced-html-sitemap"),
                             checked: !!attrs.index,

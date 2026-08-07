@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.0.17] - 2026-08-07
+
+### Changes
+- Add a `taxonomies` option that lists term archives as their own sitemap sections, with `exclude_terms`, `hide_empty_terms`, and `show_counts` controls.
+- Add taxonomy selection to the shortcode generator and the block inspector.
+- Fix the front-end stylesheet being registered with a filesystem path, so no plugin CSS ever loaded.
+- Restore the column layout styles, which were commented out.
+- Clear the sitemap cache when taxonomy terms change.
+
 ## [0.0.16] - 2026-04-30
 
 ### Changes
