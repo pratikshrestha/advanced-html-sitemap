@@ -1,12 +1,16 @@
 # Changelog
 
+## [0.0.19] - 2026-08-07
+
+### Changes
+- Add theme-neutral default styling: section rules, spacing, index chips, and indented hierarchy, all derived from inherited type and currentColor so no theme palette or font is overridden.
+- Raise specificity on list rules so themes that style content lists (e.g. `.page-content article ul`) no longer indent sitemap entries.
+- Add `--ahs-rule`, `--ahs-column-gap`, `--ahs-row-gap`, `--ahs-item-gap`, and `--ahs-heading-size` custom properties for overriding spacing without editing plugin CSS.
+
 ## [0.0.18] - 2026-08-07
 
 ### Changes
 - Enqueue the front-end stylesheet before the cache check. A cached sitemap returned early and never enqueued its CSS, so every visit after the first was unstyled and the column layout had no effect.
-- Add theme-neutral default styling: section rules, spacing, index chips, and indented hierarchy, all derived from inherited type and currentColor so no theme palette or font is overridden.
-- Raise specificity on list rules so themes that style content lists (e.g. `.page-content article ul`) no longer indent sitemap entries.
-- Add `--ahs-rule`, `--ahs-column-gap`, `--ahs-row-gap`, `--ahs-item-gap`, and `--ahs-heading-size` custom properties for overriding spacing without editing plugin CSS.
 
 ## [0.0.17] - 2026-08-07
 

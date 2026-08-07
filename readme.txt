@@ -4,7 +4,7 @@ Tags: html sitemap, sitemap, seo, navigation
 Requires at least: 5.8
 Tested up to: 6.9.4
 Requires PHP: 7.2
-Stable tag: 0.0.18
+Stable tag: 0.0.19
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -109,10 +109,13 @@ Yes. The plugin does not collect data, make external requests, or use cookies.
 
 == Changelog ==
 
+= 0.0.19 =
+* Added theme-neutral default styling that inherits your theme's fonts and colours, including dark themes.
+* Fixed themes that style content lists indenting every sitemap entry.
+* Added CSS custom properties for adjusting spacing and rule colour.
+
 = 0.0.18 =
 * Fixed cached sitemaps rendering without the plugin stylesheet, which stopped the column layout from applying.
-* Added theme-neutral default styling that inherits your theme's fonts and colours, including dark themes.
-* Added CSS custom properties for adjusting spacing and rule colour.
 
 = 0.0.17 =
 * Added a taxonomies option that lists term archives as their own sitemap sections.
@@ -146,6 +149,9 @@ Yes. The plugin does not collect data, make external requests, or use cookies.
 * Admin shortcode generator
 
 == Upgrade Notice ==
+
+= 0.0.19 =
+Adds default styling that adapts to your theme, and fixes list indentation on themes that style content lists.
 
 = 0.0.18 =
 Fixes the column layout not applying on cached sitemaps.
