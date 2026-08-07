@@ -111,6 +111,8 @@ Yes. The plugin does not collect data, make external requests, or use cookies.
 
 = 0.0.18 =
 * Fixed cached sitemaps rendering without the plugin stylesheet, which stopped the column layout from applying.
+* Added theme-neutral default styling that inherits your theme's fonts and colours, including dark themes.
+* Added CSS custom properties for adjusting spacing and rule colour.
 
 = 0.0.17 =
 * Added a taxonomies option that lists term archives as their own sitemap sections.
