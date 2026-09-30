@@ -211,7 +211,7 @@ final class Advanced_HTML_Sitemap_Renderer
                             continue;
                         }
 
-                        $title = wp_strip_all_tags(get_the_title($post_id));
+                        $title = $this->plain_title(get_the_title($post_id));
                         if ($title === '') {
                             $title = __('(no title)', 'advanced-html-sitemap');
                         }
@@ -457,7 +457,7 @@ final class Advanced_HTML_Sitemap_Renderer
                 continue;
             }
 
-            $out .= '<li><a href="' . esc_url(get_permalink($child->ID)) . '">' . esc_html(wp_strip_all_tags($child->post_title));
+            $out .= '<li><a href="' . esc_url(get_permalink($child->ID)) . '">' . esc_html($this->plain_title($child->post_title));
             if ($show_dates) {
                 $out .= ' <small>(' . esc_html(get_the_date('', $child->ID)) . ')</small>';
             }
@@ -484,7 +484,7 @@ final class Advanced_HTML_Sitemap_Renderer
             return '';
         }
 
-        $item_html = '<li><a href="' . esc_url($link) . '">' . esc_html(wp_strip_all_tags($term_obj->name));
+        $item_html = '<li><a href="' . esc_url($link) . '">' . esc_html($this->plain_title($term_obj->name));
         if ($show_counts) {
             $item_html .= ' <small>(' . esc_html(number_format_i18n((int) $term_obj->count)) . ')</small>';
         }
@@ -554,9 +554,19 @@ final class Advanced_HTML_Sitemap_Renderer
         wp_register_style($handle, AHS_URL . $css_rel, [], $css_ver);
     }
 
+    /**
+     * Reduce a title to plain text. Entities are decoded first so titles stored as
+     * "&lt;strong&gt;" are stripped as well as literal "<strong>" markup.
+     */
+    private function plain_title(string $title): string
+    {
+        return trim(wp_strip_all_tags(html_entity_decode($title, ENT_QUOTES, get_bloginfo('charset'))));
+    }
+
+
     private function cache_key(array $atts): string
     {
-        return 'ahs_' . md5(wp_json_encode($atts));
+        return 'ahs_' . md5(AHS_VERSION . wp_json_encode($atts));
     }
 
     private function track_cache_key(string $key): void

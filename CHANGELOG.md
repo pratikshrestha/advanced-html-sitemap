@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.0.22] - 2026-09-30
+
+### Changes
+- Decode HTML entities before stripping tags from titles, so titles stored as `&lt;strong&gt;` no longer show the tags.
+- Include the plugin version in the sitemap cache key so an update never serves stale cached markup.
+
 ## [0.0.21] - 2026-09-30
 
 ### Changes

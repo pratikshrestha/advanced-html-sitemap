@@ -4,7 +4,7 @@ Tags: html sitemap, sitemap, seo, navigation
 Requires at least: 5.8
 Tested up to: 7.1.2
 Requires PHP: 7.2
-Stable tag: 0.0.21
+Stable tag: 0.0.22
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -109,6 +109,10 @@ Yes. The plugin does not collect data, make external requests, or use cookies.
 
 == Changelog ==
 
+= 0.0.22 =
+* Fixed titles stored with encoded HTML tags still showing the tags in the sitemap.
+* Updating the plugin now refreshes cached sitemaps automatically.
+
 = 0.0.21 =
 * Marked as tested with WordPress 7.1.2.
 
@@ -155,6 +159,9 @@ Yes. The plugin does not collect data, make external requests, or use cookies.
 * Admin shortcode generator
 
 == Upgrade Notice ==
+
+= 0.0.22 =
+Fixes HTML tags still appearing in sitemap titles and refreshes cached sitemaps.
 
 = 0.0.21 =
 Marks the plugin as tested with WordPress 7.1.2.
