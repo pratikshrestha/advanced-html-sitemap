@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.0.21] - 2026-09-30
+
+### Changes
+- Update "Tested up to" to WordPress 7.1.2 so the compatibility notice no longer reads "Not tested".
+
 ## [0.0.20] - 2026-09-30
 
 ### Changes

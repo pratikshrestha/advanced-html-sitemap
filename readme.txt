@@ -2,9 +2,9 @@
 Contributors: pratikshrestha
 Tags: html sitemap, sitemap, seo, navigation
 Requires at least: 5.8
-Tested up to: 6.9.4
+Tested up to: 7.1.2
 Requires PHP: 7.2
-Stable tag: 0.0.20
+Stable tag: 0.0.21
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -109,6 +109,9 @@ Yes. The plugin does not collect data, make external requests, or use cookies.
 
 == Changelog ==
 
+= 0.0.21 =
+* Marked as tested with WordPress 7.1.2.
+
 = 0.0.20 =
 * Fixed titles containing HTML tags (such as <strong>) showing the raw tags in the sitemap.
 
@@ -152,6 +155,9 @@ Yes. The plugin does not collect data, make external requests, or use cookies.
 * Admin shortcode generator
 
 == Upgrade Notice ==
+
+= 0.0.21 =
+Marks the plugin as tested with WordPress 7.1.2.
 
 = 0.0.20 =
 Fixes raw HTML tags appearing in sitemap titles.
