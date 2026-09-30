@@ -4,7 +4,7 @@ Tags: html sitemap, sitemap, seo, navigation
 Requires at least: 5.8
 Tested up to: 6.9.4
 Requires PHP: 7.2
-Stable tag: 0.0.19
+Stable tag: 0.0.20
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -109,6 +109,9 @@ Yes. The plugin does not collect data, make external requests, or use cookies.
 
 == Changelog ==
 
+= 0.0.20 =
+* Fixed titles containing HTML tags (such as <strong>) showing the raw tags in the sitemap.
+
 = 0.0.19 =
 * Added theme-neutral default styling that inherits your theme's fonts and colours, including dark themes.
 * Fixed themes that style content lists indenting every sitemap entry.
@@ -149,6 +152,9 @@ Yes. The plugin does not collect data, make external requests, or use cookies.
 * Admin shortcode generator
 
 == Upgrade Notice ==
+
+= 0.0.20 =
+Fixes raw HTML tags appearing in sitemap titles.
 
 = 0.0.19 =
 Adds default styling that adapts to your theme, and fixes list indentation on themes that style content lists.

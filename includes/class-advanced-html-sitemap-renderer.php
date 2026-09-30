@@ -211,7 +211,7 @@ final class Advanced_HTML_Sitemap_Renderer
                             continue;
                         }
 
-                        $title = get_the_title($post_id);
+                        $title = wp_strip_all_tags(get_the_title($post_id));
                         if ($title === '') {
                             $title = __('(no title)', 'advanced-html-sitemap');
                         }
@@ -457,7 +457,7 @@ final class Advanced_HTML_Sitemap_Renderer
                 continue;
             }
 
-            $out .= '<li><a href="' . esc_url(get_permalink($child->ID)) . '">' . esc_html($child->post_title);
+            $out .= '<li><a href="' . esc_url(get_permalink($child->ID)) . '">' . esc_html(wp_strip_all_tags($child->post_title));
             if ($show_dates) {
                 $out .= ' <small>(' . esc_html(get_the_date('', $child->ID)) . ')</small>';
             }
@@ -484,7 +484,7 @@ final class Advanced_HTML_Sitemap_Renderer
             return '';
         }
 
-        $item_html = '<li><a href="' . esc_url($link) . '">' . esc_html($term_obj->name);
+        $item_html = '<li><a href="' . esc_url($link) . '">' . esc_html(wp_strip_all_tags($term_obj->name));
         if ($show_counts) {
             $item_html .= ' <small>(' . esc_html(number_format_i18n((int) $term_obj->count)) . ')</small>';
         }

@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.0.20] - 2026-09-30
+
+### Changes
+- Strip HTML tags from post, page, and term titles before escaping, so titles containing literal `<strong>` markup no longer show the tags in the sitemap.
+
 ## [0.0.19] - 2026-08-07
 
 ### Changes
